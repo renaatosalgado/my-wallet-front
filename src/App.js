@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Login from "./pages/Login";
+import { Login, SignUp } from "./pages";
 import { AuthProvider } from "./contexts/AuthContext";
-import SignUp from "./pages/Sign-up";
 
 export default function App() {
   return (

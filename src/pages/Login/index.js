@@ -20,7 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     if (auth && auth.token) {
-      navigate("/today");
+      navigate("/main");
     }
     //eslint-disable-next-line
   }, []);

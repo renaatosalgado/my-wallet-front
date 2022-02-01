@@ -6,7 +6,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-top: calc((100vh - 450px) / 2);
+  margin: calc((100vh - 450px) / 2) auto;
 `;
 
 export default Container;
