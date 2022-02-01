@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { Login, SignUp } from "./pages";
+import { Login, SignUp, Main } from "./pages";
 import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
@@ -10,6 +10,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/main" element={<Main />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

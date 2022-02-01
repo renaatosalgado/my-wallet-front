@@ -1,4 +1,5 @@
 import Login from "./Login";
-import SignUp from "./Sign-up";
+import SignUp from "./SignUp";
+import Main from "./Main"
 
-export { Login, SignUp };
+export { Login, SignUp, Main };
