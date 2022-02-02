@@ -41,13 +41,24 @@ export default function Login() {
         login(response.data);
         navigate("/main");
       })
-      .catch(() => {
+      .catch((error) => {
         setIsLoading(false);
 
-        alert(
-          "Ocorreu um erro ao tentar efetuar seu login. Por favor, preencha os dados novamente."
-        );
-        setLoginData({ email: "", password: "" });
+        if (error.response.status === 422) {
+          setLoginData({
+            email: "",
+            password: "",
+          });
+          return alert("Insira os dados corretamente.");
+        }
+
+        if (error.response.status === 401) {
+          setLoginData({
+            email: "",
+            password: "",
+          });
+          return alert("E-mail e/ou senha estão incorreros.");
+        }
       });
   }
 
