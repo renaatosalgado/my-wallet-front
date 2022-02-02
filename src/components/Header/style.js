@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: calc(100vw - 50px);
-  padding: 25px 0;
+  width: calc(100vw - 30px);
+  padding: 20px 0;
 
   display: flex;
   align-items: center;
@@ -13,7 +13,6 @@ const Container = styled.div`
 
 const UserName = styled.div`
   font-size: 26px;
-  line-height: 31px;
   font-weight: 700;
 
   color: #ffffff;
