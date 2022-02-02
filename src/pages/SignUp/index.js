@@ -13,6 +13,7 @@ import api from "../../services/api";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [signUpData, setSignUpData] = useState({
     name: "",
     email: "",
@@ -20,36 +21,57 @@ export default function SignUp() {
     confirm_password: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-
   function handleChange(e) {
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     setIsLoading(true);
 
-    const promise = api.postSignUp({ ...signUpData });
-    promise
-      .then(() => {
-        setIsLoading(false);
-        navigate("/");
-      })
-      .catch(() => {
-        setIsLoading(false);
+    if (signUpData.password !== signUpData.confirm_password) {
+      setSignUpData({ ...signUpData, password: "", confirm_password: "" });
 
-        alert(
-          "Ocorreu um erro ao tentar efetuar seu cadastro. Por favor, preencha os dados novamente."
-        );
+      setIsLoading(false);
+
+      return alert(
+        "As senhas inseridas não são correspondentes. Por favor preencha os dados novamente."
+      );
+    } else delete signUpData.confirm_password;
+
+    try {
+      await api.postSignUp({ ...signUpData });
+
+      setIsLoading(false);
+      navigate("/");
+    } catch (error) {
+      setIsLoading(false);
+      if (error.response.status === 409) {
+        setSignUpData({ ...signUpData, email: "" });
+        return alert("E-mail já cadastrado.");
+      }
+
+      if (error.response.status === 422) {
         setSignUpData({
           name: "",
           email: "",
           password: "",
           confirm_password: "",
         });
+        return alert("Insira os dados corretamente.");
+      }
+
+      alert(
+        "Ocorreu um erro ao tentar efetuar seu cadastro. Por favor, preencha os dados novamente."
+      );
+      setSignUpData({
+        name: "",
+        email: "",
+        password: "",
+        confirm_password: "",
       });
+    }
   }
   return (
     <Container>
