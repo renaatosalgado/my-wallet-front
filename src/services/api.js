@@ -14,9 +14,24 @@ function postSignUp(body) {
   return promise;
 }
 
+function postAddIncome(body, token) {
+  const promise = axios.post(`${BASE_URL}/add-income`, body, token);
+
+  return promise;
+}
+
+function postAddExpense(body, token) {
+  const promise = axios.post(`${BASE_URL}/add-expense`, body, token);
+
+  return promise;
+}
+
+
 const api = {
   postLogin,
   postSignUp,
+  postAddIncome,
+  postAddExpense
 };
 
 export default api;

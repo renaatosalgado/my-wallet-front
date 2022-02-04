@@ -39,11 +39,12 @@ export default function Main() {
           </Box>
           <Value>700,00</Value>
         </SingleTransaction>
-        
+
         <Balance>
           <p>SALDO</p>
           <Value>700,00</Value>
         </Balance>
+        
       </Transactions>
       <AddingButtons>
         <SingleButton>
