@@ -13,6 +13,7 @@ const Container = styled.div`
 const Transactions = styled.div`
   width: calc(100vw - 30px);
   background-color: #ffffff;
+  padding-bottom: 40px;
 
   height: calc(100vh - 114px - 30px - 70px);
 
@@ -70,7 +71,7 @@ const Description = styled.div`
 `;
 
 const Value = styled.div`
-  font-weight: 700;
+  font-weight: 400;
   color: ${(props) => (props.status === "income" ? "#03AC00" : "#C70000")};
 `;
 
@@ -90,6 +91,8 @@ const Balance = styled.div`
   position: absolute;
   bottom: 10px;
   left: 10px;
+
+  background-color: #ffffff;
 
   p {
     font-weight: 700;

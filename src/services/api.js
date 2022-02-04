@@ -26,12 +26,17 @@ function postAddExpense(body, token) {
   return promise;
 }
 
+function getTransactions(token) {
+  const promise = axios.get(`${BASE_URL}/get-transactions`, token);
+  return promise;
+}
 
 const api = {
   postLogin,
   postSignUp,
   postAddIncome,
-  postAddExpense
+  postAddExpense,
+  getTransactions,
 };
 
 export default api;

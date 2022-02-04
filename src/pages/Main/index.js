@@ -13,38 +13,70 @@ import {
   Balance,
 } from "./style";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import useAuth from "../../hooks/useAuth";
+
 export default function Main() {
+  const { auth } = useAuth();
+  const [hasTransactions, setHasTransactions] = useState(false);
+  const [transactions, setTransactions] = useState(null);
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    api
+      .getTransactions({ headers: { Authorization: `Bearer ${auth.token}` } })
+      .then((res) => {
+        setTransactions(res.data);
+        setHasTransactions(true);
+        calculateBalance();
+      })
+      .catch(() => {
+        setHasTransactions(false);
+      });
+    //eslint-disable-next-line
+  }, [hasTransactions]);
+
+  function calculateBalance() {
+    let incomes = 0;
+    let expenses = 0;
+
+    transactions.forEach((transaction) => {
+      if (transaction.type === "income") {
+        incomes += transaction.value;
+      } else {
+        expenses += transaction.value;
+      }
+    });
+
+    const balance = incomes - expenses;
+    setBalance(balance.toFixed(2));
+  }
+
   return (
     <Container>
       <Header />
       <Transactions>
-        <SingleTransaction>
-          <Box>
-            <Date>04/02</Date>
-            <Description>Eu estou aqui</Description>
-          </Box>
-          <Value>700,00</Value>
-        </SingleTransaction>
-        <SingleTransaction>
-          <Box>
-            <Date>04/02</Date>
-            <Description>Eu estou aqui</Description>
-          </Box>
-          <Value>700,00</Value>
-        </SingleTransaction>
-        <SingleTransaction>
-          <Box>
-            <Date>04/02</Date>
-            <Description>Eu estou aqui</Description>
-          </Box>
-          <Value>700,00</Value>
-        </SingleTransaction>
+        {hasTransactions
+          ? transactions.reverse().map((transaction, index) => (
+              <SingleTransaction key={index}>
+                <Box>
+                  <Date>{transaction.date}</Date>
+                  <Description>{transaction.description}</Description>
+                </Box>
+                <Value status={`${transaction.type}`}>
+                  {transaction.value.toFixed(2).replace(".", ",")}
+                </Value>
+              </SingleTransaction>
+            ))
+          : "Ainda não tem nada meu amigo!"}
 
         <Balance>
           <p>SALDO</p>
-          <Value>700,00</Value>
+          <Value status={`${balance > 0 ? "income" : "expense"}`}>
+            {balance}
+          </Value>
         </Balance>
-        
       </Transactions>
       <AddingButtons>
         <SingleButton>
