@@ -13,13 +13,14 @@ const Container = styled.div`
 const Transactions = styled.div`
   width: calc(100vw - 30px);
   background-color: #ffffff;
-  padding-bottom: 40px;
 
   height: calc(100vh - 114px - 30px - 70px);
 
   border-radius: 5px;
 
   position: relative;
+
+  overflow: auto;
 `;
 
 const AddingButtons = styled.div`
@@ -84,7 +85,7 @@ const Balance = styled.div`
 
   font-size: 16px;
 
-  display: flex;
+  display: ${(props) => (props.hasTransactions ? "flex" : "none")};
   align-items: center;
   justify-content: space-between;
 
@@ -92,11 +93,32 @@ const Balance = styled.div`
   bottom: 10px;
   left: 10px;
 
-  background-color: #ffffff;
+  z-index: 1;
+
+  background-color: aliceblue;
 
   p {
     font-weight: 700;
   }
+`;
+
+const NoTransactions = styled.div`
+  width: calc(100vw - 30px);
+  background-color: #ffffff;
+
+  height: calc(100vh - 114px - 30px - 70px);
+
+  border-radius: 5px;
+  font-size: 20px;
+  color: #868686;
+  line-height: 23px;
+  text-align: center;
+  word-break: break-word;
+  padding: 70px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export {
@@ -110,4 +132,5 @@ export {
   Value,
   Box,
   Balance,
+  NoTransactions,
 };

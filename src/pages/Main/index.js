@@ -11,6 +11,7 @@ import {
   Value,
   Box,
   Balance,
+  NoTransactions,
 } from "./style";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -28,7 +29,9 @@ export default function Main() {
       .getTransactions({ headers: { Authorization: `Bearer ${auth.token}` } })
       .then((res) => {
         setTransactions(res.data);
-        setHasTransactions(true);
+        if (res.data.length !== 0) {
+          setHasTransactions(true);
+        }
         calculateBalance();
       })
       .catch(() => {
@@ -57,23 +60,25 @@ export default function Main() {
     <Container>
       <Header />
       <Transactions>
-        {hasTransactions
-          ? transactions.reverse().map((transaction, index) => (
-              <SingleTransaction key={index}>
-                <Box>
-                  <Date>{transaction.date}</Date>
-                  <Description>{transaction.description}</Description>
-                </Box>
-                <Value status={`${transaction.type}`}>
-                  {transaction.value.toFixed(2).replace(".", ",")}
-                </Value>
-              </SingleTransaction>
-            ))
-          : "Ainda não tem nada meu amigo!"}
+        {hasTransactions ? (
+          transactions.reverse().map((transaction, index) => (
+            <SingleTransaction key={index}>
+              <Box>
+                <Date>{transaction.date}</Date>
+                <Description>{transaction.description}</Description>
+              </Box>
+              <Value status={`${transaction.type}`}>
+                {transaction.value.toFixed(2).replace(".", ",")}
+              </Value>
+            </SingleTransaction>
+          ))
+        ) : (
+          <NoTransactions>Não há registros de entrada ou saída</NoTransactions>
+        )}
 
-        <Balance>
+        <Balance hasTransactions={hasTransactions}>
           <p>SALDO</p>
-          <Value status={`${balance > 0 ? "income" : "expense"}`}>
+          <Value status={`${balance >= 0 ? "income" : "expense"}`}>
             {balance}
           </Value>
         </Balance>
