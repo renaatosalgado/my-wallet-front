@@ -7,6 +7,7 @@ const Container = styled.div`
   justify-content: center;
 
   font-family: "Raleway", sans-serif;
+  font-weight: 400;
 `;
 
 const Transactions = styled.div`
@@ -16,6 +17,8 @@ const Transactions = styled.div`
   height: calc(100vh - 114px - 30px - 70px);
 
   border-radius: 5px;
+
+  position: relative;
 `;
 
 const AddingButtons = styled.div`
@@ -49,4 +52,59 @@ const SingleButton = styled.div`
   }
 `;
 
-export { Container, Transactions, AddingButtons, SingleButton };
+const SingleTransaction = styled.div`
+  width: calc(100% - 20px);
+
+  margin: 10px auto;
+  font-size: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Date = styled.div``;
+
+const Description = styled.div`
+  margin-left: 10px;
+`;
+
+const Value = styled.div`
+  font-weight: 700;
+  color: ${(props) => (props.status === "income" ? "#03AC00" : "#C70000")};
+`;
+
+const Box = styled.div`
+  display: flex;
+`;
+
+const Balance = styled.div`
+  width: calc(100% - 20px);
+
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+
+  p {
+    font-weight: 700;
+  }
+`;
+
+export {
+  Container,
+  Transactions,
+  AddingButtons,
+  SingleButton,
+  SingleTransaction,
+  Date,
+  Description,
+  Value,
+  Box,
+  Balance,
+};
