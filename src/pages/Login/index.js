@@ -9,6 +9,7 @@ import {
 import { ThreeDots } from "react-loader-spinner";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 
@@ -49,7 +50,11 @@ export default function Login() {
             email: "",
             password: "",
           });
-          return alert("Insira os dados corretamente.");
+          return Swal.fire({
+            icon: "error",
+            title: "Falha no login!",
+            text: "A senha deve ter no mínimo 6 caracteres e o e-mail deve ser válido.",
+          });
         }
 
         if (error.response.status === 401) {
@@ -57,7 +62,11 @@ export default function Login() {
             email: "",
             password: "",
           });
-          return alert("E-mail e/ou senha estão incorretos.");
+          return Swal.fire({
+            icon: "error",
+            title: "Falha no login!",
+            text: "E-mail e/ou senha incorretos.",
+          });
         }
       });
   }

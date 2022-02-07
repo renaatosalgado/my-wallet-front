@@ -14,7 +14,6 @@ import {
   NoTransactions,
 } from "./style";
 import { StyledLink } from "../../components/Form/index.js";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";

@@ -9,6 +9,7 @@ import {
 import { ThreeDots } from "react-loader-spinner";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import api from "../../services/api";
 
 export default function SignUp() {
@@ -35,9 +36,11 @@ export default function SignUp() {
 
       setIsLoading(false);
 
-      return alert(
-        "As senhas inseridas não são correspondentes. Por favor preencha os dados novamente."
-      );
+      return Swal.fire({
+        icon: "error",
+        title: "Cadastro não realizado!",
+        text: "As senhas inseridas não são correspondentes.",
+      });
     } else delete signUpData.confirm_password;
 
     try {
@@ -49,7 +52,11 @@ export default function SignUp() {
       setIsLoading(false);
       if (error.response.status === 409) {
         setSignUpData({ ...signUpData, email: "" });
-        return alert("E-mail já cadastrado.");
+        return Swal.fire({
+          icon: "error",
+          title: "Cadastro não realizado!",
+          text: "E-mail já cadastrado.",
+        });
       }
 
       if (error.response.status === 422) {
@@ -59,12 +66,13 @@ export default function SignUp() {
           password: "",
           confirm_password: "",
         });
-        return alert("Insira os dados corretamente.");
+        return Swal.fire({
+          icon: "error",
+          title: "Cadastro não realizado!",
+          text: "A senha deve ter no mínimo 6 caracteres e o e-mail deve ser válido.",
+        });
       }
 
-      alert(
-        "Ocorreu um erro ao tentar efetuar seu cadastro. Por favor, preencha os dados novamente."
-      );
       setSignUpData({
         name: "",
         email: "",
