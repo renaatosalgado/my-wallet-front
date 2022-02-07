@@ -74,7 +74,7 @@ const SingleTransaction = styled.div`
 `;
 
 const Date = styled.div`
-  color: #C6C6C6;
+  color: #c6c6c6;
 `;
 
 const Description = styled.div`
@@ -93,6 +93,10 @@ const Value = styled.div`
 
 const Box = styled.div`
   display: flex;
+
+  span {
+    cursor: pointer;
+  }
 `;
 
 const Balance = styled.div`
@@ -108,12 +112,6 @@ const Balance = styled.div`
   display: ${(props) => (props.hasTransactions ? "flex" : "none")};
   align-items: center;
   justify-content: space-between;
-
-  /* position: absolute;
-  bottom: 10px;
-  left: 10px;
-
-  z-index: 1; */
 
   p {
     font-weight: 700;

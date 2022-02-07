@@ -1,5 +1,9 @@
 import Header from "../../components/Header";
-import { RemoveCircleOutline, AddCircleOutline } from "react-ionicons";
+import {
+  RemoveCircleOutline,
+  AddCircleOutline,
+  CloseOutline,
+} from "react-ionicons";
 import {
   Container,
   Transactions,
@@ -68,9 +72,19 @@ export default function Main() {
                 <Date>{transaction.date}</Date>
                 <Description>{transaction.description}</Description>
               </Box>
-              <Value status={`${transaction.type}`}>
-                {transaction.value.toFixed(2).replace(".", ",")}
-              </Value>
+              <Box>
+                <Value status={`${transaction.type}`}>
+                  {transaction.value.toFixed(2).replace(".", ",")}
+                </Value>
+                <span>
+                  <CloseOutline
+                    color={"#c6c6c6"}
+                    title={"Excluir"}
+                    height="16px"
+                    width="16px"
+                  />
+                </span>
+              </Box>
             </SingleTransaction>
           ))
         ) : (
