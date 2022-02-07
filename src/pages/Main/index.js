@@ -59,6 +59,7 @@ export default function Main() {
   return (
     <Container>
       <Header />
+
       <Transactions>
         {hasTransactions ? (
           transactions.reverse().map((transaction, index) => (
@@ -75,14 +76,15 @@ export default function Main() {
         ) : (
           <NoTransactions>Não há registros de entrada ou saída</NoTransactions>
         )}
-
-        <Balance hasTransactions={hasTransactions}>
-          <p>SALDO</p>
-          <Value status={`${balance >= 0 ? "income" : "expense"}`}>
-            {balance}
-          </Value>
-        </Balance>
       </Transactions>
+
+      <Balance hasTransactions={hasTransactions}>
+        <p>SALDO</p>
+        <Value status={`${balance >= 0 ? "income" : "expense"}`}>
+          {balance}
+        </Value>
+      </Balance>
+
       <AddingButtons>
         <SingleButton>
           <StyledLink to="/add-income">

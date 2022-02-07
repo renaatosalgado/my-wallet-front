@@ -14,13 +14,14 @@ const Transactions = styled.div`
   width: calc(100vw - 30px);
   background-color: #ffffff;
 
-  height: calc(100vh - 114px - 30px - 70px);
+  height: calc(100vh - 114px - 30px - 110px);
 
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: none;
+  border-bottom-right-radius: none;
 
-  position: relative;
-
-  overflow: auto;
+  overflow-y: auto;
 `;
 
 const AddingButtons = styled.div`
@@ -29,7 +30,7 @@ const AddingButtons = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 15px;
+  margin: 15px 0;
 `;
 
 const SingleButton = styled.div`
@@ -72,10 +73,17 @@ const SingleTransaction = styled.div`
   align-items: center;
 `;
 
-const Date = styled.div``;
+const Date = styled.div`
+  color: #C6C6C6;
+`;
 
 const Description = styled.div`
   margin-left: 10px;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
 
 const Value = styled.div`
@@ -88,7 +96,12 @@ const Box = styled.div`
 `;
 
 const Balance = styled.div`
-  width: calc(100% - 20px);
+  width: calc(100% - 30px);
+  background-color: #ffffff;
+
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 
   font-size: 16px;
 
@@ -96,11 +109,11 @@ const Balance = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  position: absolute;
+  /* position: absolute;
   bottom: 10px;
   left: 10px;
 
-  z-index: 1;
+  z-index: 1; */
 
   p {
     font-weight: 700;
