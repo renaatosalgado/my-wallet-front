@@ -57,7 +57,7 @@ export default function Login() {
             email: "",
             password: "",
           });
-          return alert("E-mail e/ou senha estão incorreros.");
+          return alert("E-mail e/ou senha estão incorretos.");
         }
       });
   }

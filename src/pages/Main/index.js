@@ -13,6 +13,7 @@ import {
   Balance,
   NoTransactions,
 } from "./style";
+import { StyledLink } from "../../components/Form/index.js";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -85,31 +86,35 @@ export default function Main() {
       </Transactions>
       <AddingButtons>
         <SingleButton>
-          <Link to="/add-income">
-            <span>
-              <AddCircleOutline
-                color={"#ffffff"}
-                title={"Nova entrada"}
-                height="25px"
-                width="25px"
-              />
-            </span>
-            <p>Nova entrada</p>
-          </Link>
+          <StyledLink to="/add-income">
+            <SingleButton>
+              <span>
+                <AddCircleOutline
+                  color={"#ffffff"}
+                  title={"Nova entrada"}
+                  height="25px"
+                  width="25px"
+                />
+              </span>
+              <p>Nova entrada</p>
+            </SingleButton>
+          </StyledLink>
         </SingleButton>
 
         <SingleButton>
-          <Link to="/add-expense">
-            <span>
-              <RemoveCircleOutline
-                color={"#ffffff"}
-                title={"Nova saída"}
-                height="25px"
-                width="25px"
-              />
-            </span>
-            <p>Nova saída</p>
-          </Link>
+          <StyledLink to="/add-expense">
+            <SingleButton>
+              <span>
+                <RemoveCircleOutline
+                  color={"#ffffff"}
+                  title={"Nova saída"}
+                  height="25px"
+                  width="25px"
+                />
+              </span>
+              <p>Nova saída</p>
+            </SingleButton>
+          </StyledLink>
         </SingleButton>
       </AddingButtons>
     </Container>

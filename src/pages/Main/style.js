@@ -28,15 +28,15 @@ const AddingButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  margin-top: 15px;
 `;
 
 const SingleButton = styled.div`
-  width: calc((100% - 15px) / 2);
-  height: 114px;
+  min-width: calc((100% - 15px) / 2);
+  min-height: 114px;
 
   border-radius: 5px;
-  margin: 15px 0;
-  padding: 10px;
 
   background-color: #a328d6;
 
@@ -51,6 +51,13 @@ const SingleButton = styled.div`
 
     position: absolute;
     bottom: 10px;
+    left: 10px;
+  }
+
+  span {
+    position: absolute;
+    top: 5px;
+    left: 5px;
   }
 `;
 
@@ -94,8 +101,6 @@ const Balance = styled.div`
   left: 10px;
 
   z-index: 1;
-
-  background-color: aliceblue;
 
   p {
     font-weight: 700;
