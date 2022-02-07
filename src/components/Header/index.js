@@ -2,18 +2,26 @@ import { ExitOutline } from "react-ionicons";
 import { Container, UserName, ExitIcon } from "./style";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-
+import api from "../../services/api";
 
 export default function Header() {
   const { auth, setAuth } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const formattedName = auth.name.replace(auth.name[0], auth.name[0].toUpperCase())
+  let formattedName;
+
+  if (auth) {
+    formattedName = auth.name.replace(auth.name[0], auth.name[0].toUpperCase());
+  } else {
+    navigate("/");
+  }
 
   function logout() {
-    localStorage.removeItem("auth");
-    setAuth(null);
-    navigate("/");
+    api.deleteSession(auth.token).then(() => {
+      localStorage.removeItem("auth");
+      setAuth(null);
+      navigate("/");
+    });
   }
 
   return (

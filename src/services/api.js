@@ -48,6 +48,11 @@ function editTransaction(transactionId, body, token) {
   return promise;
 }
 
+function deleteSession(tokenNumber) {
+  const promise = axios.delete(`${BASE_URL}/delete-session/${tokenNumber}`);
+  return promise;
+}
+
 const api = {
   postLogin,
   postSignUp,
@@ -56,6 +61,7 @@ const api = {
   getTransactions,
   deleteTransaction,
   editTransaction,
+  deleteSession,
 };
 
 export default api;
