@@ -20,6 +20,7 @@ import {
 import { StyledLink } from "../../components/Form/index.js";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
 export default function Main() {
@@ -60,6 +61,29 @@ export default function Main() {
     setBalance(balance.toFixed(2));
   }
 
+  function deleteTransaction(transactionId) {
+    Swal.fire({
+      title: "Você tem certeza?",
+      text: "Essa ação não poderá ser desfeita!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, deletar transação!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        api
+          .deleteTransaction(transactionId, {
+            headers: { Authorization: `Bearer ${auth.token}` },
+          })
+          .then(() => {
+            Swal.fire("Deletado!", "Sua transação foi deletada.", "success");
+            window.location.reload();
+          });
+      }
+    });
+  }
+
   return (
     <Container>
       <Header />
@@ -82,6 +106,9 @@ export default function Main() {
                     title={"Excluir"}
                     height="16px"
                     width="16px"
+                    onClick={() => {
+                      deleteTransaction(transaction._id);
+                    }}
                   />
                 </span>
               </Box>

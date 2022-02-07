@@ -31,12 +31,31 @@ function getTransactions(token) {
   return promise;
 }
 
+function deleteTransaction(transactionId, token) {
+  const promise = axios.delete(
+    `${BASE_URL}/delete-transactions/${transactionId}`,
+    token
+  );
+  return promise;
+}
+
+function editTransaction(transactionId, body, token) {
+  const promise = axios.put(
+    `${BASE_URL}/edit-transactions/${transactionId}`,
+    body,
+    token
+  );
+  return promise;
+}
+
 const api = {
   postLogin,
   postSignUp,
   postAddIncome,
   postAddExpense,
   getTransactions,
+  deleteTransaction,
+  editTransaction,
 };
 
 export default api;
